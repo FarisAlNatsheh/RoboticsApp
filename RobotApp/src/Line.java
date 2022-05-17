@@ -24,10 +24,22 @@ public class Line {
 	public float[] getQuality() {
 		float standard = 8;
 		if(quality < standard) {
-			float[] arr = {0,0+255*quality/standard};
+
+			float r;
+			float g;
+			
+			if(quality == 0) {
+				r = 255;
+				g = 0;
+			}
+			else {
+				r = 255*quality/standard;
+				g = 255 - 255*quality/standard;
+			}
+			float[] arr = {r,g};
 			return arr;
 		}
-		float[] arr ={0,0};
+		float[] arr ={0,255};
 		return arr;
 	}
 }
