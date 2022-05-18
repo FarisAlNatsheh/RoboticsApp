@@ -28,7 +28,7 @@ public class SensorWindow extends GLFW{
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glClearColor(0,0,0,0);
+		glClearColor(0,0,255,0);
 
 
 		texture = new Texture("texture.png");
