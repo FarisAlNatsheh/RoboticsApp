@@ -9,10 +9,12 @@ public class SensorWindow extends GLFW{
 	public final static int WINDOW_WIDTH = 700;
 	static ArrayList<Line> lines = new ArrayList<Line>();
 	
-	static double targetFPMS = 1000000000/30;
+	static double targetFPMS = 1000000000/60;
 	static Texture texture;
 
 	public static void createWindow() {
+		Thread t = new Thread(new PortRead());
+		t.run();
 		double start = System.nanoTime();
 		System.out.println("Intializing window");
 		glfwInit();
@@ -37,7 +39,7 @@ public class SensorWindow extends GLFW{
 		double timeFPS = System.nanoTime();
 		double currentFPS = (System.nanoTime()-timeFPS);
 		for(int i =0; i < 360; i++) {
-			lines.add(new Line(i, i%8));
+			//lines.add(new Line(i, i%8));
 		}
 		while(!glfwWindowShouldClose(window)) {
 
@@ -61,6 +63,7 @@ public class SensorWindow extends GLFW{
 				glfwSwapBuffers(window);
 			}
 		}	
+		t.interrupt();
 		glfwTerminate();
 	}
 	public static void drawLine(float x1, float y1, float x2, float y2) {
